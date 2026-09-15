@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StudyFlow — Ders Çalışma Planlayıcısı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">◈</div>
+      <div>
+        <div class="logo-name">StudyFlow</div>
+        <div class="logo-sub" data-i18n="logo_sub">Ders Planlayıcı</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-tab="panel"><span class="nav-ico">▦</span><span data-i18n="nav_dashboard">Dashboard</span></button>
+      <button class="nav-item" data-tab="gorevler"><span class="nav-ico">✓</span><span data-i18n="nav_tasks">Görevler</span><span class="nav-count" id="nav-count"></span></button>
+      <button class="nav-item" data-tab="program"><span class="nav-ico">◫</span><span data-i18n="nav_program">Ders Programı</span></button>
+      <button class="nav-item" data-tab="takvim"><span class="nav-ico">📅</span><span data-i18n="nav_calendar">Takvim</span></button>
+      <button class="nav-item" data-tab="istatistik"><span class="nav-ico">📊</span><span data-i18n="nav_reports">Raporlar</span></button>
+    </nav>
+
+    <div class="side-card">
+      <div class="side-card-title" data-i18n="side_streak_t">🔥 Çalışma serisi</div>
+      <div class="streak" id="streak">0</div>
+      <div class="muted-light small" data-i18n="side_streak_h">Her gün en az 1 görev bitir, seriyi büyüt.</div>
+    </div>
+
+    <div class="side-card">
+      <div class="side-card-title" data-i18n="side_focus_t">⏱ Odak skoru</div>
+      <div class="streak" id="side-focus">0</div>
+      <div class="muted-light small" id="side-sessions">—</div>
+    </div>
+
+    <div class="side-foot">
+      <div class="lang-seg">
+        <button class="seg-btn" data-lang="tr">🇹🇷 TR</button>
+        <button class="seg-btn" data-lang="en">🇬🇧 EN</button>
+      </div>
+      <button class="ghost-btn" id="theme-btn">🌙</button>
+      <button class="ghost-btn" id="export-btn" data-i18n="export_backup">⤓ Yedek al</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="page-header">
+      <div>
+        <h1 id="page-title">—</h1>
+        <p class="muted" id="page-sub">—</p>
+        <p class="quote" id="quote">💡 —</p>
+      </div>
+      <div class="header-actions">
+        <div class="date-pill" id="today-pill">—</div>
+        <button class="btn primary lg" id="open-modal" data-i18n="new_task">+ Yeni Görev</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="tab-panel" class="page active">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">📝</span><span class="kpi-label" data-i18n="kpi_today">Bugünkü görev</span></div><div class="kpi-num" id="st-bugun">0</div><div class="kpi-hint" id="st-bugun-hint">—</div></div>
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">⏳</span><span class="kpi-label" data-i18n="kpi_open">Bekleyen</span></div><div class="kpi-num" id="st-bekleyen">0</div><div class="kpi-hint" data-i18n="kpi_open_h">Tamamlanmayı bekliyor</div></div>
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">⏱</span><span class="kpi-label" data-i18n="kpi_focus">Haftalık odak</span></div><div class="kpi-num" id="st-sure">0</div><div class="kpi-hint" data-i18n="kpi_focus_h">Tamamlanan görev süresi</div></div>
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">🎯</span><span class="kpi-label" data-i18n="kpi_rate">Tamamlanma</span></div><div class="kpi-num" id="st-oran">0%</div><div class="progress"><div class="progress-fill" id="st-bar"></div></div></div>
+      </div>
+
+      <div class="cols-2">
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3 data-i18n="today_flow">📌 Bugünün akışı</h3><button class="link" data-goto="gorevler" data-i18n="view_all">Tümü →</button></div>
+            <div id="today-list" class="task-list"></div>
+            <button class="btn wide" id="remind-btn" data-i18n="remind_btn">🔔 Günün özetini bildir</button>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 data-i18n="exam_t">🎓 Sınav geri sayımı</h3></div>
+            <div class="row">
+              <input id="exam-name" class="grow" data-i18n-ph="exam_name_ph" placeholder="Sınav adı (örn. TYT Deneme)" />
+              <input id="exam-date" type="date" />
+              <button class="btn primary" id="exam-add" data-i18n="add">Ekle</button>
+            </div>
+            <div id="exam-list" class="exam-list"></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card timer-card">
+            <div class="card-head"><h3 data-i18n="focus_t">🍅 Odak</h3><span class="pill">Pomodoro</span></div>
+            <div class="timer" id="timer-display">25:00</div>
+            <div class="timer-btns">
+              <button class="btn primary" id="timer-start" data-i18n="timer_start">Başlat</button>
+              <button class="btn" id="timer-reset" data-i18n="timer_reset">Sıfırla</button>
+            </div>
+            <div class="seg">
+              <button class="seg-btn active" data-min="25">25</button>
+              <button class="seg-btn" data-min="45">45</button>
+              <button class="seg-btn" data-min="60">60</button>
+            </div>
+            <p class="muted small" id="focus-stats">—</p>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 data-i18n="goal_t">🎯 Haftalık hedef</h3></div>
+            <p class="muted small" data-i18n="goal_desc">Bu hafta bitirmeyi hedeflediğin görev sayısı.</p>
+            <div class="row">
+              <input id="goal-input" type="number" min="1" max="200" />
+              <button class="btn" id="goal-save" data-i18n="save">Kaydet</button>
+            </div>
+            <div class="goal-bar"><div class="goal-fill" id="goal-fill"></div></div>
+            <p class="muted small" id="goal-text">—</p>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 data-i18n="upcoming_t">⏭ Yaklaşan (3 gün)</h3><button class="link" data-goto="takvim" data-i18n="goto_calendar">Takvim →</button></div>
+            <div id="upcoming-list" class="mini-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GÖREVLER -->
+    <section id="tab-gorevler" class="page">
+      <div class="card">
+        <div class="filter-bar">
+          <input id="search" class="grow" data-i18n-ph="search_ph" placeholder="🔍 Ders veya konu ara..." />
+          <select id="filter-durum">
+            <option value="all" data-i18n="f_all">Tümü</option>
+            <option value="open" data-i18n="f_open">Bekleyen</option>
+            <option value="done" data-i18n="f_done">Tamamlanan</option>
+            <option value="over" data-i18n="f_over">Geciken</option>
+          </select>
+          <select id="filter-kategori"><option value="all">—</option></select>
+          <select id="sort-by">
+            <option value="date" data-i18n="sort_date">Tarihe göre</option>
+            <option value="prio" data-i18n="sort_prio">Önceliğe göre</option>
+            <option value="lesson" data-i18n="sort_lesson">Derse göre</option>
+          </select>
+        </div>
+        <div class="bulk-bar">
+          <span class="muted small" id="bulk-info">—</span>
+          <div class="row">
+            <button class="btn sm" id="clear-done" data-i18n="clear_done">🧹 Tamamlananları temizle</button>
+            <button class="btn sm" id="csv-btn" data-i18n="csv_btn">⤓ CSV indir</button>
+          </div>
+        </div>
+        <div id="task-list" class="task-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3 data-i18n="cat_t">🏷️ Kategoriler</h3></div>
+        <div class="row">
+          <input id="new-cat" class="grow" data-i18n-ph="new_cat_ph" placeholder="Yeni kategori adı (örn. Sayısal)" />
+          <button class="btn" id="add-cat" data-i18n="add">Ekle</button>
+        </div>
+        <div id="cat-list" class="chips"></div>
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section id="tab-program" class="page">
+      <div class="card">
+        <div class="card-head"><h3 data-i18n="sched_t">🗓️ Haftalık Ders Programı</h3><span class="muted small" id="sched-total">—</span></div>
+        <div class="sched-form">
+          <select id="s-gun"></select>
+          <input id="s-ders" class="grow" data-i18n-ph="s_ders_ph" placeholder="Ders (örn. Fizik)" />
+          <input id="s-bas" type="time" />
+          <input id="s-bit" type="time" />
+          <button class="btn primary" id="s-add" data-i18n="add_ex">+ Ekle</button>
+        </div>
+        <div id="schedule" class="schedule"></div>
+      </div>
+    </section>
+
+    <!-- TAKVİM -->
+    <section id="tab-takvim" class="page">
+      <div class="cols-cal">
+        <div class="card">
+          <div class="card-head">
+            <h3 id="cal-title">—</h3>
+            <div class="row">
+              <button class="btn sm" id="cal-prev">◀</button>
+              <button class="btn sm" id="cal-today" data-i18n="cal_today">Bugün</button>
+              <button class="btn sm" id="cal-next">▶</button>
+            </div>
+          </div>
+          <div class="cal-head" id="cal-head"></div>
+          <div id="cal-grid" class="cal-grid"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3 id="cal-detail-title">—</h3></div>
+          <div id="cal-detail" class="task-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RAPORLAR -->
+    <section id="tab-istatistik" class="page">
+      <div class="kpi-grid kpi-grid-3">
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">📦</span><span class="kpi-label" data-i18n="rep_total">Toplam görev</span></div><div class="kpi-num" id="is-toplam">0</div></div>
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">✅</span><span class="kpi-label" data-i18n="rep_rate">Tamamlanma</span></div><div class="kpi-num" id="is-tamam">0%</div></div>
+        <div class="kpi"><div class="kpi-top"><span class="kpi-ico">⏱</span><span class="kpi-label" data-i18n="rep_time">Planlanan süre</span></div><div class="kpi-num" id="is-dakika">0</div></div>
+      </div>
+      <div class="cols-2">
+        <div class="card">
+          <div class="card-head"><h3 data-i18n="last7">📊 Son 7 gün</h3><span class="muted small" data-i18n="last7_h">Tamamlanan görev sayısı</span></div>
+          <div id="chart" class="chart"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3 data-i18n="by_lesson">📚 Derse göre dağılım</h3></div>
+          <div id="by-lesson"></div>
+          <div class="insight" id="insight"></div>
+          <div class="insight" id="best-day"></div>
+        </div>
+      </div>
+      <div class="card danger-zone">
+        <div class="card-head"><h3 data-i18n="data_t">⚠️ Veri yönetimi</h3></div>
+        <p class="muted small" data-i18n="data_desc">Veriler tarayıcında (localStorage) saklanır. Düzenli yedek almanı öneririm.</p>
+        <div class="row">
+          <button class="btn" id="export-btn-2" data-i18n="json_btn">⤓ JSON indir</button>
+          <label class="btn"><span data-i18n="import_btn">⤒ İçe aktar</span><input type="file" id="import-file" accept=".json" hidden></label>
+          <button class="btn danger" id="wipe" data-i18n="wipe_btn">Tümünü sil</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot muted" data-i18n="foot">StudyFlow • verilerin cihazında saklanır 💾</footer>
+  </div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-back" id="modal-back">
+  <div class="modal">
+    <div class="modal-head"><h3 data-i18n="modal_t">➕ Yeni çalışma görevi</h3><button class="icon-btn" id="close-modal">✕</button></div>
+    <form id="task-form" class="form">
+      <div class="row">
+        <div class="field grow"><label data-i18n="f_lesson">Ders *</label><input id="f-ders" data-i18n-ph="f_ders_ph" placeholder="örn. Matematik" required /></div>
+        <div class="field grow"><label data-i18n="f_cat">Kategori</label><select id="f-kategori"></select></div>
+      </div>
+      <div class="field"><label data-i18n="f_topic">Konu / açıklama *</label><input id="f-konu" data-i18n-ph="f_konu_ph" placeholder="örn. Türev — 2 test çöz" required /></div>
+      <div class="field"><label data-i18n="f_note_l">Not (isteğe bağlı)</label><textarea id="f-note" rows="2" data-i18n-ph="f_note_ph" placeholder="örn. Sayfa 40-55, formülleri tekrar et"></textarea></div>
+      <div class="row">
+        <div class="field"><label data-i18n="f_date">Tarih</label><input id="f-tarih" type="date" required /></div>
+        <div class="field"><label data-i18n="f_time">Saat</label><input id="f-saat" type="time" /></div>
+        <div class="field"><label data-i18n="f_dur">Süre (dk)</label><input id="f-sure" type="number" min="5" step="5" placeholder="60" /></div>
+        <div class="field"><label data-i18n="f_prio">Öncelik</label>
+          <select id="f-oncelik">
+            <option value="dusuk" data-i18n="prio_low">▫ Düşük</option>
+            <option value="orta" data-i18n="prio_med" selected>◼ Orta</option>
+            <option value="yuksek" data-i18n="prio_high">⬛ Yüksek</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" id="cancel-modal" data-i18n="cancel">Vazgeç</button>
+        <button type="submit" class="btn primary lg" data-i18n="save">Kaydet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
