@@ -1,4 +1,4 @@
-# 📚 StudyFlow — Ders Çalışma Planlayıcısı
+# 📚 StudyFlow — Study Planner
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
@@ -10,123 +10,123 @@
 ![Responsive](https://img.shields.io/badge/Design-Responsive-ec4899)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**StudyFlow**, öğrenciler için tasarlanmış, kurulum gerektirmeyen modern bir **ders çalışma planlayıcısıdır**.
-Görev takibi, haftalık ders programı, takvim, sınav geri sayımı, odak (Pomodoro) zamanlayıcısı ve
-ilerleme raporlarını tek bir şık panelde toplar. Verileriniz yalnızca **kendi tarayıcınızda** saklanır —
-hesap açmak, sunucu kurmak veya internete bağlı olmak gerekmez.
+**StudyFlow** is a modern, zero-setup **study planner for students**.
+It brings task tracking, a weekly timetable, a calendar, an exam countdown, a Pomodoro focus timer
+and progress reports together in one sleek dashboard. Your data lives **only in your own browser** —
+no accounts, no servers, no internet connection required.
 
-> 🇬🇧 **English?** The app UI is fully bilingual (TR/EN) — switch language from the sidebar.
-> This README is written in Turkish; every feature below works in both languages.
+> 🇹🇷 **Türkçe?** The app UI is fully bilingual — switch to Turkish anytime from the sidebar.
+> The app itself ships with 75+ translated strings and locale-aware date formats.
 
 ---
 
-## ✨ Öne Çıkan Özellikler
+## ✨ Highlights
 
-| Alan | Açıklama |
+| Area | What it does |
 |---|---|
-| 📝 **Görev yönetimi** | Ders + konu + not + tarih/saat + süre + öncelik + kategori ile detaylı görevler |
-| ⏭⧉ **Hızlı aksiyonlar** | Tek tıkla tamamlama, yarına erteleme, kopyalama, silme |
-| 🗓️ **Haftalık program** | Pazartesi–Pazar ders dilimleri (saat aralıklı), gün bazında sayaç |
-| 📅 **Aylık takvim** | Görev yoğunluğunu gün hücrelerinde görme, güne tıklayıp detay açma |
-| 🎓 **Sınav geri sayımı** | Sınav ekle, kalan günü otomatik gör (son 7 gün vurgulu) |
-| 🍅 **Odak zamanlayıcısı** | 25 / 45 / 60 dk Pomodoro + biten oturumların otomatik skoru |
-| 🎯 **Haftalık hedef** | Hedef görev sayısı belirle, ilerleme çubuğuyla takip et |
-| 🔥 **Çalışma serisi** | Art arda görev bitirdiğin günleri sayan streak takibi |
-| 📊 **Raporlar** | Son 7 gün grafiği, derse göre dağılım, en verimli gün analizi |
-| 🔔 **Bildirimler** | Günün bekleyen iş özetini tarayıcı bildirimi olarak al |
-| 🌙 **Koyu / açık mod** | Tek tıkla tema değişimi, tercihin hatırlanır |
-| 🌍 **TR / EN dil desteği** | 75+ arayüz metni anında çevrilir, tarih formatı dile uyar |
-| 💾 **Yedekleme** | JSON indir / geri yükle + Excel uyumlu CSV dışa aktarma |
-| 📱 **Responsive** | Telefonda tek sütuna düşen, mobil uyumlu tasarım |
+| 📝 **Task management** | Rich tasks with lesson + topic + note + date/time + duration + priority + category |
+| ⏭⧉ **Quick actions** | One-click complete, postpone to tomorrow, duplicate, delete |
+| 🗓️ **Weekly timetable** | Monday–Sunday lesson slots with time ranges and per-day counters |
+| 📅 **Monthly calendar** | See task density inside day cells; click any day for details |
+| 🎓 **Exam countdown** | Add exams and see remaining days automatically (last 7 days highlighted) |
+| 🍅 **Focus timer** | 25 / 45 / 60 min Pomodoro with automatic session scoring |
+| 🎯 **Weekly goal** | Set a target number of tasks and track it with a progress bar |
+| 🔥 **Study streak** | Counts consecutive days with at least one finished task |
+| 📊 **Reports** | Last-7-days chart, per-lesson breakdown, most-productive-day insights |
+| 🔔 **Notifications** | Get the day's pending work as a browser notification |
+| 🌙 **Dark / light mode** | One-click theme switch, preference is remembered |
+| 🌍 **TR / EN languages** | 75+ UI strings translate instantly, date format adapts |
+| 💾 **Backup** | JSON download / restore + Excel-friendly CSV export |
+| 📱 **Responsive** | Collapses to a single column on phones |
 
 ---
 
-## 🖥️ Sayfalar ve Açıklamaları
+## 🖥️ Pages Explained
 
-### 1. Dashboard — günün komuta merkezi
-- **4 renkli KPI kartı:** bugünkü ilerleme (`tamamlanan/toplam`), bekleyen sayısı, haftalık odak süresi, genel tamamlanma oranı.
-- **Bugünün akışı:** tarihi geçmiş + bugüne ait bekleyen görevler öncelik sırasına yakın akışta listelenir.
-- **Odak kartı:** Pomodoro zamanlayıcı + bu cihazda biriken oturum/dakika skoru.
-- **Haftalık hedef kartı:** Pazartesi–Pazar aralığında biten görev sayısının hedefe oranı.
-- **Yaklaşan (3 gün):** önümüzdeki 3 günün görevlerine hızlı bakış.
-- **Sınav geri sayımı:** sınav adı + tarih ekle, kalan günü rozet olarak gör.
+### 1. Dashboard — your daily command center
+- **4 colorful KPI cards:** today's progress (`done/total`), pending count, weekly focus time, overall completion rate.
+- **Today's flow:** overdue + today's pending tasks in one glanceable stream.
+- **Focus card:** Pomodoro timer plus the session/minute score accumulated on this device.
+- **Weekly goal card:** ratio of tasks finished in the Monday–Sunday window vs. your target.
+- **Upcoming (3 days):** a quick peek at the next 3 days of tasks.
+- **Exam countdown:** add an exam name + date and see the remaining days as a badge.
 
-### 2. Görevler — tüm işlerin kontrol paneli
-- Metin arama (ders + konu + not içinde), durum filtresi (tümü / bekleyen / tamamlanan / geciken),
-  kategori filtresi ve 3 sıralama modu (tarih / öncelik / ders).
-- Özet çubuğu (`X görev • Y bekleyen • Z geciken`), tamamlananları toplu temizleme ve CSV indirme.
-- Kategori yönetimi: yeni kategori ekleme / silme (görev formunda otomatik görünür).
+### 2. Tasks — mission control for all work
+- Full-text search (across lesson + topic + notes), status filter (all / pending / done / overdue),
+  category filter, and 3 sort modes (date / priority / lesson).
+- Summary bar (`X tasks • Y pending • Z overdue`), bulk-clear completed tasks, CSV download.
+- Category management: add / delete categories (they instantly appear in the task form).
 
-### 3. Ders Programı — haftalık rutin
-- Gün + ders + başlangıç/bitiş saati ile dilim ekleme; her gün kartında dilim sayacı ve toplam sayaç.
-- Sabit haftalık derslerini (okul/kurs programı) bir kez gir, hep gözünün önünde olsun.
+### 3. Schedule — your weekly routine
+- Add slots with day + lesson + start/end time; per-day counters plus a grand total.
+- Enter fixed school/course hours once and keep them always in sight.
 
-### 4. Takvim — ayın kuşbakışı görünümü
-- Pazartesi başlayan ızgara, bugünün vurgulanması, günde en fazla 3 ders rozeti + sayaç.
-- Herhangi bir güne tıklayınca sağ panelde o günün görev kartları açılır (oradan da tamamlanabilir).
+### 4. Calendar — the month at a glance
+- Monday-first grid, today highlighted, up to 3 lesson badges per day + overflow counter.
+- Click any day to open that day's task cards in the side panel (completable right there).
 
-### 5. Raporlar — motivasyonun verisi
-- Toplam görev, tamamlanma yüzdesi, planlanan toplam süre.
-- Son 7 günün tamamlanan görev grafiği, derse göre dağılım çubukları,
-  "en çok çalışılan ders" ve "en verimli gün" içgörüleri.
+### 5. Reports — data for your motivation
+- Total tasks, completion percentage, total planned time.
+- Last-7-days completion chart, per-lesson bars, plus
+  "most studied lesson" and "most productive day" insights.
 
 ---
 
-## 🚀 Kullanım
+## 🚀 Usage
 
-Kurulum **yoktur** — saf HTML + CSS + JS'tir, derleme adımı gerektirmez.
+There is **no installation** — pure HTML + CSS + JS, no build step.
 
-**Yöntem 1 — Çift tık (en kolay):**
-1. Bu repoyu indir (`Code → Download ZIP`) veya klonla.
-2. `index.html` dosyasına çift tıkla. Hepsi bu. ✅
+**Option 1 — Double-click (easiest):**
+1. Download this repo (`Code → Download ZIP`) or clone it.
+2. Double-click `index.html`. That's it. ✅
 
-**Yöntem 2 — Klonla:**
+**Option 2 — Clone:**
 ```bash
 git clone https://github.com/Flynntaggart26/planlayici.git
 cd planlayici
-# index.html'i tarayıcıda aç
+# open index.html in your browser
 ```
 
-**Yöntem 3 — VS Code Live Server:**
-`index.html` → sağ tık → *Open with Live Server* (otomatik yenileme ile geliştirme için ideal).
+**Option 3 — VS Code Live Server:**
+Right-click `index.html` → *Open with Live Server* (ideal for development with auto-reload).
 
-> 💡 **Veriler nerede?** Tüm veriler tarayıcının `localStorage` alanında
-> (`dersPlanlayici_v1` anahtarı) tutulur. Farklı tarayıcı/cihaz arasında senkronize olmaz —
-> taşımak için **Raporlar → JSON indir / İçe aktar** özelliğini kullanın.
+> 💡 **Where is my data?** Everything is stored in your browser's `localStorage`
+> (key `dersPlanlayici_v1`). It does not sync across browsers/devices —
+> use **Reports → Download JSON / Import** to move it around.
 
 ---
 
-## ⌨️ Klavye ve İpuçları
+## ⌨️ Shortcuts & Tips
 
-| İpucu | Açıklama |
+| Tip | Explanation |
 |---|---|
-| `Esc` | Açık görev penceresini kapatır |
-| 🔔 *Günün özetini bildir* | İlk tıklamada tarayıcı bildirim izni ister, sonra özeti bildirim olarak gösterir |
-| 🧹 *Temizle* | Yalnızca tamamlanmış görevleri siler, bekleyenlere dokunmaz |
-| 🎯 *Hedef* | Hafta Pazartesi–Pazar aralığına göre hesaplanır |
+| `Esc` | Closes the open task dialog |
+| 🔔 *Notify day summary* | Asks for notification permission on first click, then shows the summary as a notification |
+| 🧹 *Clear* | Deletes only completed tasks, never touches pending ones |
+| 🎯 *Goal* | The week is calculated over the Monday–Sunday range |
 
 ---
 
-## 🗺️ Yol Haritası
+## 🗺️ Roadmap
 
-- [ ] Sürükle-bırak ile program/görev taşıma
-- [ ] Zamanlanmış (otomatik) hatırlatıcılar
-- [ ] Ders bazında süre hedefleri
-- [ ] PWA desteği (çevrimdışı kurulum + mobil uygulama hissi)
-- [ ] GitHub Pages canlı demo bağlantısı
+- [ ] Drag-and-drop for schedule/tasks
+- [ ] Scheduled (automatic) reminders
+- [ ] Per-lesson time targets
+- [ ] PWA support (offline install + app-like feel on mobile)
+- [ ] GitHub Pages live demo link
 
-Fikir veya hata bildirimi için [Issues](https://github.com/Flynntaggart26/planlayici/issues) sekmesini kullanın.
-
----
-
-## 🤝 Katkıda Bulunma
-
-1. Repoyu fork'layın, yeni dal açın (`git checkout -b ozellik/xyz`).
-2. Değişikliğinizi yapıp commit'leyin.
-3. Pull Request açın — kısa bir açıklama eklemeyi unutmayın.
+Please use [Issues](https://github.com/Flynntaggart26/planlayici/issues) for ideas or bug reports.
 
 ---
 
-## 📄 Lisans
+## 🤝 Contributing
 
-Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır — özgürce kullanın, değiştirin, paylaşın. 💜
+1. Fork the repo and create a branch (`git checkout -b feature/xyz`).
+2. Make your change and commit it.
+3. Open a Pull Request — don't forget a short description.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) — use, modify and share freely. 💜
